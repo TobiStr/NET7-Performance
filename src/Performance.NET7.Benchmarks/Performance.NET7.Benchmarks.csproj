@@ -1,9 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<OutputType>Exe</OutputType>
+	<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+	<EnablePreviewFeatures>True</EnablePreviewFeatures>
+	<Optimize>true</Optimize>
   </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
+  </ItemGroup>
 
 </Project>
