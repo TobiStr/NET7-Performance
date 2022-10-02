@@ -6,6 +6,7 @@
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
 	<EnablePreviewFeatures>True</EnablePreviewFeatures>
+	<LangVersion>11</LangVersion>
 	<Optimize>true</Optimize>
   </PropertyGroup>
 
