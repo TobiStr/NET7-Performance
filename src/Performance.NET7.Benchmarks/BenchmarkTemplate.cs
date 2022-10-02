@@ -1,8 +1,9 @@
 ﻿namespace Performance.NET7.Benchmarks;
 
+[RPlotExporter]
+[RankColumn(NumeralSystem.Arabic)]
 [ShortRunJob(RuntimeMoniker.Net60)]
 [ShortRunJob(RuntimeMoniker.Net70)]
-[RankColumn(NumeralSystem.Arabic)]
 [MemoryDiagnoser(displayGenColumns: false)]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 public class BenchmarkTemplate
