@@ -1,11 +1,12 @@
-﻿namespace Performance.NET7.Benchmarks;
+﻿using BenchmarkDotNet.Columns;
+
+namespace Performance.NET7.Benchmarks;
 
 [RPlotExporter]
-[RankColumn(NumeralSystem.Arabic)]
-[ShortRunJob(RuntimeMoniker.Net60)]
-[ShortRunJob(RuntimeMoniker.Net70)]
+[SimpleJob(RuntimeMoniker.Net60, launchCount: 1, warmupCount: 3, targetCount: 5, invocationCount: -1, id: "NET 6.0")]
+[SimpleJob(RuntimeMoniker.Net70, launchCount: 1, warmupCount: 3, targetCount: 5, invocationCount: -1, id: "NET 7.0")]
 [MemoryDiagnoser(displayGenColumns: false)]
-[Orderer(SummaryOrderPolicy.FastestToSlowest)]
+[HideColumns(Column.Job, Column.StdDev, Column.Error)]
 public class BenchmarkTemplate
 {
     [Params(100)]
