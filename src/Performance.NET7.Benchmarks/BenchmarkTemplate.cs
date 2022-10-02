@@ -1,6 +1,4 @@
-﻿using BenchmarkDotNet.Columns;
-
-namespace Performance.NET7.Benchmarks;
+﻿namespace Performance.NET7.Benchmarks;
 
 [RPlotExporter]
 [SimpleJob(RuntimeMoniker.Net60, launchCount: 1, warmupCount: 3, targetCount: 5, invocationCount: -1, id: "NET 6.0")]
@@ -17,6 +15,7 @@ public class BenchmarkTemplate
     {
     }
 
+    [Benchmark]
     public void Benchmark()
     {
     }
