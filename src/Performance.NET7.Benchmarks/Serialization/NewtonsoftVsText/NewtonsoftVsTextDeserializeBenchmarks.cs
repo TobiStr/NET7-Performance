@@ -14,32 +14,32 @@ public class NewtonsoftVsTextDeserializeBenchmarks
     [Params(10000)]
     public int Count { get; set; }
 
-    private string serializedTestUsers;
+private string serializedTestUsers;
 
-    private List<string> serializedTestUsersList = new();
+private List<string> serializedTestUsersList = new();
 
-    [GlobalSetup]
-    public void GlobalSetup()
+[GlobalSetup]
+public void GlobalSetup()
+{
+    var faker = new Faker<User>()
+        .CustomInstantiator(f => new User(
+            Guid.NewGuid(),
+            f.Name.FirstName(),
+            f.Name.LastName(),
+            f.Name.FullName(),
+            f.Internet.UserName(f.Name.FirstName(), f.Name.LastName()),
+            f.Internet.Email(f.Name.FirstName(), f.Name.LastName())
+        ));
+
+    var testUsers = faker.Generate(Count);
+
+    serializedTestUsers = JsonSerializer.Serialize(testUsers);
+
+    foreach (var user in testUsers.Select(u => JsonSerializer.Serialize(u)))
     {
-        var faker = new Faker<User>()
-            .CustomInstantiator(f => new User(
-                Guid.NewGuid(),
-                f.Name.FirstName(),
-                f.Name.LastName(),
-                f.Name.FullName(),
-                f.Internet.UserName(f.Name.FirstName(), f.Name.LastName()),
-                f.Internet.Email(f.Name.FirstName(), f.Name.LastName())
-            ));
-
-        var testUsers = faker.Generate(Count);
-
-        serializedTestUsers = JsonSerializer.Serialize(testUsers);
-
-        foreach (var user in testUsers.Select(u => JsonSerializer.Serialize(u)))
-        {
-            serializedTestUsersList.Add(user);
-        }
+        serializedTestUsersList.Add(user);
     }
+}
 
     [Benchmark]
     public void NewtonsoftDeserializeBigData() =>
